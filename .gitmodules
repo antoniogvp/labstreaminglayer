@@ -155,3 +155,9 @@
 [submodule "Apps/BackyardBrains"]
 	path = Apps/BackyardBrains
 	url = https://github.com/labstreaminglayer/App-BackyardBrains.git
+[submodule "OnlinePlotter/OnlinePlotter"]
+	path = OnlinePlotter/OnlinePlotter
+	url = https://github.com/labstreaminglayer/App-MATLABViewer.git
+[submodule "OnlinePlotter/MATLABViewer"]
+	path = OnlinePlotter/MATLABViewer
+	url = https://github.com/labstreaminglayer/App-MATLABViewer.git
