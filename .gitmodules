@@ -161,3 +161,12 @@
 [submodule "OnlinePlotter/MATLABViewer"]
 	path = OnlinePlotter/MATLABViewer
 	url = https://github.com/labstreaminglayer/App-MATLABViewer.git
+[submodule "OnlinePlotter/PythonPlotter"]
+	path = OnlinePlotter/PythonPlotter
+	url = https://github.com/antoniogvp/lsl-csplotter-python.git
+[submodule "OnlinePlotter/PythonViewer"]
+	path = OnlinePlotter/PythonViewer
+	url = https://github.com/antoniogvp/lsl-deviewer-python
+[submodule "OnlineProcessing/LabRecorder"]
+	path = OnlineProcessing/LabRecorder
+	url = https://github.com/labstreaminglayer/App-LabRecorder.git
