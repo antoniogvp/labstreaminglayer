@@ -178,7 +178,7 @@
      <item row="1" column="1">
       <widget class="QPushButton" name="pushButton_16">
        <property name="text">
-        <string>Launch Python Viewer</string>
+        <string>Launch Python Plotter</string>
        </property>
       </widget>
      </item>

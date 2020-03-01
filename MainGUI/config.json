@@ -1,0 +1,48 @@
+{
+    "appBioSemi": {
+        "winpath": "../Apps/BioSemi/BioSemi.exe",
+        "linpath": "../Apps/BioSemi/build/BioSemi"
+    },
+    "appFaros": {
+        "path": "../Apps/RTHRV_Faros/FarosLauncherGUI.py"
+    },
+    "appEnobio": {
+        "winpath": "C:/Program Files (x86)/Neuroelectrics/NIC2/NIC2.exe"
+    },
+    "appLiveAmp": {},
+    "appNirScout": {
+        "path": "../Apps/NirScout/ReceiveData.py"
+    },
+    "appNirSport": {},
+    "appSMIRED500": {},
+    "appEyeLink1000": {
+        "path": "../Apps/EyeLink/eyelink.py"
+    },
+    "appTobiiStreamEngine": {
+        "winpath": "../Apps/TobiiStreamEngine/build/Release/TobiiStreamEngine.exe"
+    },
+    "appTobiiPro": {
+        "winpath": "../Apps/TobiiPro/build/install/TobiiPro/TobiiPro.exe"
+    },
+    "appSmartEye": {
+        "path": "../Apps/EyeLink/eyelink.py"
+    },
+    "appLabRecorder": {
+        "winpath": "../OnlineProcessing/LabRecorder/build/install/LabRecorder/LabRecorder.exe"
+    },
+    "appMATLABViewer": {
+        "dirpath": "../OnlinePlotter/MATLABViewer"
+    },
+    "appPythonPlotter": {
+        "dirpath": "../OnlinePlotter/PythonPlotter"
+    },
+    "appPythonDEViewer": {
+        "dirpath": "../OnlinePlotter/PythonViewer"
+    },
+    "appKeyboard": {
+        "winpath": "../Apps/Input/build/install/Input/keyboard.exe"
+    },
+    "appMouse": {
+        "winpath": "../Apps/Input/build/install/Input/mouse.exe"
+    }
+}

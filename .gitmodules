@@ -35,15 +35,9 @@
 [submodule "Apps/EmbarcaderoXE"]
 	path = Apps/EmbarcaderoXE
 	url = https://github.com/labstreaminglayer/App-EmbarcaderoXE.git
-[submodule "Apps/LabRecorder"]
-	path = Apps/LabRecorder
-	url = https://github.com/labstreaminglayer/App-LabRecorder.git
 [submodule "Apps/Wiimote"]
 	path = Apps/Wiimote
 	url = https://github.com/labstreaminglayer/App-Wiimote.git
-[submodule "Apps/MATLABViewer"]
-	path = Apps/MATLABViewer
-	url = https://github.com/labstreaminglayer/App-MATLABViewer.git
 [submodule "Apps/PhaseSpace"]
 	path = Apps/PhaseSpace
 	url = https://github.com/labstreaminglayer/App-PhaseSpace.git
@@ -155,18 +149,18 @@
 [submodule "Apps/BackyardBrains"]
 	path = Apps/BackyardBrains
 	url = https://github.com/labstreaminglayer/App-BackyardBrains.git
-[submodule "OnlinePlotter/OnlinePlotter"]
-	path = OnlinePlotter/OnlinePlotter
-	url = https://github.com/labstreaminglayer/App-MATLABViewer.git
 [submodule "OnlinePlotter/MATLABViewer"]
 	path = OnlinePlotter/MATLABViewer
 	url = https://github.com/labstreaminglayer/App-MATLABViewer.git
-[submodule "OnlinePlotter/PythonPlotter"]
-	path = OnlinePlotter/PythonPlotter
-	url = https://github.com/antoniogvp/lsl-csplotter-python.git
 [submodule "OnlinePlotter/PythonViewer"]
 	path = OnlinePlotter/PythonViewer
 	url = https://github.com/antoniogvp/lsl-deviewer-python
 [submodule "OnlineProcessing/LabRecorder"]
 	path = OnlineProcessing/LabRecorder
 	url = https://github.com/labstreaminglayer/App-LabRecorder.git
+[submodule "Apps/NIRScout"]
+	path = Apps/NIRScout
+	url = https://github.com/kevinbae15/NIRScout-Algorithm-LSL-PUBLIC.git
+[submodule "OnlinePlotter/PythonPlotter"]
+	path = OnlinePlotter/PythonPlotter
+	url = https://github.com/antoniogvp/lsl-csplotter-python.git
