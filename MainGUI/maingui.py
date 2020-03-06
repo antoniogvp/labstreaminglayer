@@ -58,11 +58,10 @@ class MainGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         
             if startApp is True:
                 filepath = '"' + filepath + '"'
-                print(filepath)
                 if platform.system() == 'Darwin':       # macOS
                     p = subprocess.call(('open', filepath))
                 elif platform.system() == 'Windows':    # Windows
-                    p = subprocess.Popen(filepath, shell=True)
+                    p = subprocess.call('start "" ' + filepath, shell=True)
                 else:                                   # linux variants
                     p = subprocess.call("./" + filepath)
         
