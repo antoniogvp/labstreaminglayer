@@ -23,9 +23,6 @@
 [submodule "Apps/OutOfTreeTest"]
 	path = Apps/OutOfTreeTest
 	url = https://github.com/labstreaminglayer/App-OutOfTreeTest.git
-[submodule "Apps/AudioCapture"]
-	path = Apps/AudioCapture
-	url = https://github.com/labstreaminglayer/App-AudioCapture
 [submodule "Apps/BAlert"]
 	path = Apps/BAlert
 	url = https://github.com/labstreaminglayer/App-BAlert.git
@@ -167,3 +164,6 @@
 [submodule "Apps/PythonScripts"]
 	path = Apps/PythonScripts
 	url = https://github.com/antoniogvp/lsl-examplescripts-python.git
+[submodule "Apps/AudioCapture"]
+	path = Apps/AudioCapture
+	url = https://github.com/labstreaminglayer/App-AudioCapture.git
