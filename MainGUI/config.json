@@ -1,48 +1,120 @@
 {
     "appBioSemi": {
-        "winpath": "../Apps/BioSemi/BioSemi.exe",
-        "linpath": "../Apps/BioSemi/build/BioSemi"
+        "linpath": "../Apps/BioSemi/build/BioSemi",
+        "winpath": "",
+        "name": "BioSemi",
+        "group": "app",
+        "func": "default"
     },
     "appFaros": {
-        "path": "../Apps/RTHRV_Faros/FarosLauncherGUI.py"
+        "path": "../Apps/RTHRV_Faros/FarosLauncherGUI.py",
+        "name": "Faros",
+        "group": "app",
+        "func": "default"
     },
     "appEnobio": {
-        "winpath": "C:/Program Files (x86)/Neuroelectrics/NIC2/NIC2.exe"
+        "winpath": "C:/Program Files (x86)/Neuroelectrics/NIC2/NIC2.exe",
+        "linpath": "",
+        "name": "Enobio",
+        "group": "app",
+        "func": "default"
     },
-    "appLiveAmp": {},
+    "appLiveAmp": {
+        "linpath": "",
+        "winpath": "",
+        "name": "LiveAmp",
+        "group": "app",
+        "func": "default"
+    },
     "appNirScout": {
-        "path": "../Apps/NirScout/ReceiveData.py"
+        "path": "../Apps/NirScout/ReceiveData.py",
+        "name": "NirScout",
+        "group": "app",
+        "func": "default"
     },
-    "appNirSport": {},
-    "appSMIRED500": {},
+    "appNirSport": {
+        "linpath": "",
+        "winpath": "",
+        "name": "NirSport",
+        "group": "app",
+        "func": "default"
+    },
+    "appSMIRED500": {
+        "linpath": "",
+        "winpath": "",
+        "name": "SMI RED5000",
+        "group": "app",
+        "func": "default"
+    },
     "appEyeLink1000": {
-        "path": "../Apps/EyeLink/eyelink.py"
+        "path": "../Apps/EyeLink/eyelink.py",
+        "name": "Eye Link 1000",
+        "group": "app",
+        "func": "default"
     },
     "appTobiiStreamEngine": {
-        "winpath": "../Apps/TobiiStreamEngine/build/Release/TobiiStreamEngine.exe"
+        "linpath": "",
+        "winpath": "../Apps/TobiiStreamEngine/build/Release/TobiiStreamEngine.exe",
+        "name": "Tobii Stream Engine",
+        "group": "app",
+        "func": "default"
     },
     "appTobiiPro": {
-        "winpath": "../Apps/TobiiPro/build/install/TobiiPro/TobiiPro.exe"
+        "linpath": "",
+        "winpath": "../Apps/TobiiPro/build/install/TobiiPro/TobiiPro.exe",
+        "name": "Tobii Pro",
+        "group": "app",
+        "func": "default"
     },
     "appSmartEye": {
-        "path": "../Apps/EyeLink/eyelink.py"
+        "path": "../Apps/EyeLink/eyelink.py",
+        "name": "SmartEye",
+        "group": "app",
+        "func": "default"
     },
     "appLabRecorder": {
-        "winpath": "../OnlineProcessing/LabRecorder/build/install/LabRecorder/LabRecorder.exe"
+        "linpath": "",
+        "winpath": "../OnlineProcessing/LabRecorder/build/install/LabRecorder/LabRecorder.exe",
+        "name": "Lab Recorder",
+        "group": "process_record",
+        "func": "default"
     },
     "appMATLABViewer": {
-        "dirpath": "../OnlinePlotter/MATLABViewer"
+        "path": "../OnlinePlotter/MATLABViewer/matlab_viewer_launch.py",
+        "name": "MATLAB Viewer",
+        "group": "viewer",
+        "func": "default"
     },
     "appPythonPlotter": {
-        "dirpath": "../OnlinePlotter/PythonPlotter"
+        "path": "../OnlinePlotter/PythonPlotter/plotter.py",
+        "name": "Python Plotter",
+        "group": "viewer",
+        "func": "default"
     },
     "appPythonDEViewer": {
-        "dirpath": "../OnlinePlotter/PythonViewer"
+        "path": "../OnlinePlotter/PythonViewer/viewer.py",
+        "name": "Discrete Event Viewer",
+        "group": "viewer",
+        "func": "default"
     },
     "appKeyboard": {
-        "winpath": "../Apps/Input/build/install/Input/keyboard.exe"
+        "linpath": "",
+        "winpath": "../Apps/Input/build/install/Input/keyboard.exe",
+        "name": "Keyboard Input",
+        "group": "test",
+        "func": "default"
     },
     "appMouse": {
-        "winpath": "../Apps/Input/build/install/Input/mouse.exe"
+        "linpath": "",
+        "winpath": "../Apps/Input/build/install/Input/mouse.exe",
+        "name": "Mouse Input",
+        "group": "test",
+        "func": "default"
+    },
+    "pythonScripts": {
+        "path": "../Apps/PythonScripts/python_scripts.py",
+        "name": "Python example scripts",
+        "group": "test",
+        "func": "default"
     }
 }

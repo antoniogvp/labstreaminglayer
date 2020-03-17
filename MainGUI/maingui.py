@@ -6,40 +6,60 @@ Created on Thu Apr 11 17:04:26 2019
 """
 
 import sys
-from qtpy import QtWidgets, uic
+from qtpy import QtWidgets
 import subprocess, platform
-import importlib
 import gui_config
 from os import path, getcwd
+from pathlib import PurePath
+from functools import partial
  
-qtCreatorFile = "launcher.ui"
-
-Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
- 
-class MainGUI(QtWidgets.QMainWindow, Ui_MainWindow):
+class MainGUI(QtWidgets.QMainWindow):
     def __init__(self):
-        QtWidgets.QMainWindow.__init__(self)
-        Ui_MainWindow.__init__(self)
-        self.setupUi(self)
-        self.pushButton.clicked.connect(lambda: self.startLSLApp("appBioSemi"))                     # BioSemi
-        self.pushButton_2.clicked.connect(lambda: self.startLSLApp("appFaros"))                     # Faros
-        self.pushButton_3.clicked.connect(lambda: self.startLSLApp("appLabRecorder"))               # LabRecorder
-        self.pushButton_4.clicked.connect(lambda: self.startLSLApp("appEnobio"))                    # Enobio
-        self.pushButton_5.clicked.connect(lambda: self.startLSLApp("appNirScout"))                  # NirScout
-        self.pushButton_6.clicked.connect(lambda: self.startLSLApp("appNirSport"))                  # NirSport
-        self.pushButton_7.clicked.connect(lambda: self.startLSLApp("appSMIRED500"))                 # SMI RED500
-        self.pushButton_8.clicked.connect(lambda: self.startLSLApp("appTobiiStreamEngine"))         # Tobii Stream Engine
-        self.pushButton_9.clicked.connect(lambda: self.startLSLApp("appTobiiPro"))                  # Tobii Pro
-        self.pushButton_10.clicked.connect(lambda: self.startLSLApp("appSmartEye"))                 # SmartEye
-        self.pushButton_11.clicked.connect(lambda: self.startLSLApp("appLiveAmp"))                  # LiveAmp
-        self.pushButton_12.clicked.connect(lambda: self.startLSLApp("appEyeLink1000"))              # Eye Link
-        self.pushButton_13.clicked.connect(lambda: self.startMATLABViewer("appMATLABViewer"))       # MATLAB viewer
-        self.pushButton_14.clicked.connect(lambda: self.startLSLApp("appKeyboard"))                 # Keyboard
-        self.pushButton_15.clicked.connect(lambda: self.startLSLApp("appMouse"))                    # Mouse
-        self.pushButton_16.clicked.connect(lambda: self.startPythonPlotter("appPythonPlotter"))     # Python viewer
-        self.pushButton_17.clicked.connect(lambda: self.startPythonDEViewer("appPythonDEViewer"))   # Python DE viewer
+        super(MainGUI,self).__init__()
+        data = gui_config.readConfigFile()
+        
+        groups = ["Application Launcher", "Recording/processing tools",
+                  "Viewer Tools", "Test tools", "Undefined"]
+        groupsShort = ["app", "process_record", "viewer", "test"]
+        
+        layoutList = []
+        boxList = []
+        [layoutList.append(QtWidgets.QGridLayout()) for n in range(len(groups))]
+        [boxList.append(QtWidgets.QGroupBox(groups[n])) for n in range(len(groups))]
+        mainbox = QtWidgets.QVBoxLayout()
+        
+        for app_id, app_info in data.items():
+            b = QtWidgets.QPushButton(app_info["name"])
+            b.setFixedWidth(200)
+            if app_info["func"] == "default":
+                b.clicked.connect(partial(self.startLSLApp, app_id))
+            else:
+                b.clicked.connect(partial(getattr(self,app_info["func"]), app_id))
+                
+            try:
+                nb = layoutList[groupsShort.index(app_info["group"])].count()
+                layoutList[groupsShort.index(app_info["group"])].addWidget(b, int(nb/3), nb%3)
+                
+            except ValueError:
+                nb = layoutList[4].count()
+                layoutList[4].addWidget(b, int(nb/3), nb%3)
+                
+        for layout, box in zip(layoutList, boxList):
+            box.setLayout(layout)
+            
+            if layout.count()>0:
+                mainbox.addWidget(box)
+                
+        self.setCentralWidget(QtWidgets.QWidget(self))
+        self.centralWidget().setLayout(mainbox)
+        
+        self.setWindowTitle("LSL Application Launcher")
+        self.setFixedSize(self.sizeHint().width(),self.sizeHint().height())
+       
+        self.show() 
     
     def startLSLApp(self, appName):
+        p = None
         startApp = True
         try:
             filepath, dictKey = gui_config.getAppFilePath(appName)
@@ -47,66 +67,38 @@ class MainGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                 QtWidgets.QMessageBox.warning(None,'Executable file not found','The executable file was not found. Please specify a correct path.',QtWidgets.QMessageBox.Ok)
                 fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Select executable file', '.')
                 try:
-                    newPath = path.relpath(str(fname[0]), getcwd())
+                    newPath = PurePath(path.relpath(str(fname[0]), getcwd())).as_posix()
                 except ValueError:
-                    newPath = str(fname[0])
+                    newPath = PurePath(str(fname[0])).as_posix()
             
-                if newPath == '':
+                if newPath == '.':
                     startApp = False
                 else:
                     gui_config.writeConfigFileValue(appName,dictKey,newPath)
+                    
+                filepath = newPath
         
             if startApp is True:
-                filepath = '"' + filepath + '"'
                 if platform.system() == 'Darwin':       # macOS
-                    p = subprocess.call(('open', filepath))
+                    if filepath[-3:] == ".py":
+                        cmd = r'directory=$(pwd); osascript -e "tell app \"terminal\" to do script \"cd $directory; python ' + filepath + r'\""'
+                        p = subprocess.call(cmd, shell=True)
+                    else:
+                        cmd = r'directory=$(pwd); osascript -e "tell app \"terminal\" to do script \"cd $directory; open ' + filepath + r'\""'
+                        p = subprocess.call(cmd, shell=True)
                 elif platform.system() == 'Windows':    # Windows
+                    filepath = '"' + filepath + '"'
                     p = subprocess.call('start "" ' + filepath, shell=True)
                 else:                                   # linux variants
-                    p = subprocess.call("./" + filepath)
+                    if filepath[-3:] == ".py":
+                        p = subprocess.call(['gnome-terminal -- python ' + filepath], shell=True)
+                    else:
+                        p = subprocess.call("./" + filepath)
         
                 return p
         except KeyError:
             QtWidgets.QMessageBox.critical(None,'Error','No version of this Application for this OS was found.',QtWidgets.QMessageBox.Ok)
-        
-    def startMATLABViewer(self, name):
-        matlab_spec = importlib.util.find_spec("matlab.engine")
-        matlab_found = matlab_spec is not None
-            
-        if not matlab_found:
-            QtWidgets.QMessageBox.critical(None,'Error','MATLAB Engine API for Python has not been found.',QtWidgets.QMessageBox.Cancel)
-        else:
-            from check_streams import check_cont_streams
-            import matlab.engine
-            availableStreams = check_cont_streams()
-            
-            if availableStreams == True:
-                eng = matlab.engine.start_matlab()
-                eng.cd(gui_config.getAppDirPath(name))
-                eng.addpath(eng.genpath('../../LSL/liblsl-Matlab'))
-                future = eng.vis_stream(nargout=0)
-                ret = future.result()
-                    
-            else:
-                QtWidgets.QMessageBox.critical(None,'Error','No online, continuous streams were found. Please make sure devices are correctly connected and linked.',QtWidgets.QMessageBox.Cancel)
-
-    def startPythonPlotter(self, name):
-        sys.path.append(gui_config.getAppDirPath(name))
-        try:
-            import plotter
-            self.p = plotter.main()
-        except:
-            print("Window was closed.") 
-                
-    def startPythonDEViewer(self, name):
-        sys.path.append(gui_config.getAppDirPath(name))
-            
-        try:
-            import viewer
-            self.v = viewer.main()
-        except:
-            print("Window was closed.") 
-
+              
     def closeApp(self,process): # to close a process
         process.terminate()
  
@@ -114,6 +106,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setQuitOnLastWindowClosed(True)
     window = MainGUI()
-    window.show()
+    #window.show()
     sys.exit(app.exec_())
     

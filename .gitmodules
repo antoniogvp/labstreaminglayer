@@ -164,3 +164,6 @@
 [submodule "OnlinePlotter/PythonPlotter"]
 	path = OnlinePlotter/PythonPlotter
 	url = https://github.com/antoniogvp/lsl-csplotter-python.git
+[submodule "Apps/PythonScripts"]
+	path = Apps/PythonScripts
+	url = https://github.com/antoniogvp/lsl-examplescripts-python.git
