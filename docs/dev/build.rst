@@ -167,20 +167,20 @@ This will create a distribution tree in the folder specified by
 
      ├── AppX
      │   ├── AppX.exe
-     │   ├── liblsl64.dll
+     │   ├── lsl.dll
      │   ├── Qt5Xml.dll
      │   ├── Qt5Gui.dll
      │   └── AppX_configuration.ini
      ├── AppY
      │   ├── AppY.exe
      │   ├── AppY_conf.exe
-     │   ├── liblsl64.dll
+     │   ├── lsl.dll
      │   └── example.png
      ├── examples
      │   ├── CppReceive.exe
      │   ├── CppSendRand.exe
      │   ├── SendDataC.exe
-     │   ├── liblsl64.dll
+     │   ├── lsl.dll
      └── LSL
        ├── share
        │   ├── LSL
@@ -191,8 +191,8 @@ This will create a distribution tree in the folder specified by
        │   ├── lsl_c.h
        │   └── lsl_cpp.h
        └── lib
-         ├── liblsl64.dll
-         ├── liblsl64.lib
+         ├── lsl.dll
+         ├── liblsl.lib
          └── lslboost.lib
 
 On Unix systems (Linux+OS X) the executable’s library path is changed to
@@ -209,21 +209,8 @@ The resulting folder :file:`LSL` contains three subfolders:
 -  :file:`include` contains the include headers for C (:file:`lsl_c.h`) and C++
    (:file:`lsl_cpp.h`) programs.
 -  :file:`lib` contains the library files. To run a program, you need the
-   :file:`liblslXY.dll` (Windows) or :file:`.so` (Linux) or :file:`.dylib` (MacOS).
-
-.. _cmakeinstalltarget:
-
-Regarding the ``install`` target
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-CMake places built binary files as well as build sideproducts in a build
-tree that should be separate from the source directory. To copy only the
-needed files (and additional library files they depend on) to a folder
-you can share with colleagues or onto another PC, you need to ‘install’
-them. This doesn’t mean ‘installing’ them in a traditional sense (i.e.,
-with Windows installers or package managers on Linux / OS X), but only
-copying them to a separate folder and fixing some hardcoded paths in the
-binaries.
+   :file:`lsl.dll` (Windows) or :file:`liblsl.so` (Linux) or
+   :file:`liblsl.dylib` (MacOS).
 
 Out of tree builds
 ~~~~~~~~~~~~~~~~~~
@@ -363,48 +350,6 @@ In case you haven’t got several PCs and Macs with different build
 environments to test your changes, you can use the CI to
 compile the code on multiple platforms and offer binaries to willing
 testers.
-
-
-.. _liblslarch:
-
-Note about architectures / binaries
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-(Also known as: "Which :file:`liblsl.so` / :file:`liblsl.dll` do I need?)
-
-Liblsl gets compiled to a binary for a *specific* combination of
-Operating System / libc (almost almost the same) and processor architecture.
-
-Most binaries include the native word size in bits in the name and a
-hint which platform the binary is for in the file extension,
-e.g. :file:`liblsl{32}.{dll}` for a 32-bit windows dll,
-:file:`liblsl{64}.{so}` for a 64 bit Linux / Android library or
-:file:`liblsl{64}.{dylib}` for a 64 bit OS X dylib.
-
-The CI system automatically builds the following combinations:
-
--  x86 Windows DLL (:file:`liblsl32.dll`)
--  x64 Windows DLL (:file:`liblsl64.dll`)
--  x64 Linux shared object for Ubuntu 18.04 (:file:`liblsl64.so`)
--  x64 OS X shared object (:file:`liblsl64.dylib`)
-
-Android also has ``.so`` shared objects, but build with a different
-toolchain so they are not interchangable with ``.so`` files for regular
-Linuxes.
-
-Embedded Linux devices typically have an ARM processor instead of an x86 / x64
-processor so the default linux binaries won't work (resulting in an error such
-as ``dlopen failed: "package/bin/liblsl64.so has unexpected e_machine: 62``).
-
-On OS X / Linux you can check what device a binary is compiled for with the
-:program:`file` command, e.g.
-
-- :cmd:`file liblsl64.dll`:
-  :samp:`liblsl64.dll: PE32+ executable (DLL) (console) {x86-64}, for MS Windows`
-- :cmd:`file liblsl64.so`:
-  :samp:`liblsl64.so: ELF 64-bit LSB shared object, {x86-64}, version 1 (GNU/Linux)`.
-- :cmd:`file jni/arm64-v8a/liblsl.so`:
-  :samp:`jni/arm64-v8a/liblsl.so: ELF 64-bit LSB shared object, {ARM aarch64}`
 
 Raspberry Pi (cross-compilation, currently not working)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
